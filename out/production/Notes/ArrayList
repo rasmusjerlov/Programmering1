@@ -1,0 +1,21 @@
+To construct an ArrayList
+	- New ArrayLyst<datatype>();
+	- ArrayList<String> friends = new ArrayList<String>();
+To access an element
+	- arraylistReference.get(index)
+	- arraylistReference.set(index, value)
+	- String name = friends.get(i);
+	- String name = friends.set(i, "Harry");
+		○ The index must be >= 0 and < friends.size()
+		○ int index = names.indexOf(værdi);
+	- ArrayList med for-each
+		ArrayList<String names = ..;
+		String allNames = "";
+		    for (String str : names) {
+				allNames = allNames + str + " ";
+			}
+
+Notes
+	- Dynamisk størrelse
+	- Abstrakt type
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/L00 IntelliJ/L00 IntelliJ.iml" filepath="$PROJECT_DIR$/L00 IntelliJ/L00 IntelliJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L01/L01 alder.iml" filepath="$PROJECT_DIR$/L01/L01 alder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L02 variable og scanner/L02 kap2.iml" filepath="$PROJECT_DIR$/L02 variable og scanner/L02 kap2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L03 Selektion IF/L03 Selektion IF.iml" filepath="$PROJECT_DIR$/L03 Selektion IF/L03 Selektion IF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L04 Loops/L04 Loops.iml" filepath="$PROJECT_DIR$/L04 Loops/L04 Loops.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L05 Workshop/L05 Workshop.iml" filepath="$PROJECT_DIR$/L05 Workshop/L05 Workshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L06 Arrays/L06 Arrays.iml" filepath="$PROJECT_DIR$/L06 Arrays/L06 Arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L07 objekter/L07 objekter.iml" filepath="$PROJECT_DIR$/L07 objekter/L07 objekter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L11 ObjekterCar/L11 ObjekterCar.iml" filepath="$PROJECT_DIR$/L11 ObjekterCar/L11 ObjekterCar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L13 Klasser/L13 Klasser.iml" filepath="$PROJECT_DIR$/L13 Klasser/L13 Klasser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L17 ArrayList/L17 ArrayList.iml" filepath="$PROJECT_DIR$/L17 ArrayList/L17 ArrayList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L18 GUI/L18 GUI.iml" filepath="$PROJECT_DIR$/L18 GUI/L18 GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Notes/Notes.iml" filepath="$PROJECT_DIR$/Notes/Notes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Programmering 1.iml" filepath="$PROJECT_DIR$/Programmering 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Projekt Klasser/Projekt Klasser.iml" filepath="$PROJECT_DIR$/Projekt Klasser/Projekt Klasser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Studiestart/Studiestart.iml" filepath="$PROJECT_DIR$/Studiestart/Studiestart.iml" />
+    </modules>
+  </component>
+</project>

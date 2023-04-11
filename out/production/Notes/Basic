@@ -1,0 +1,20 @@
+Kontrolstrukturer
+	- Sekvens (Metoder og klasser)
+	- Selektion (If / If else statements)
+	- Loops (While og for-loops)
+
+Variable datatyper
+	- Simple datatyper (Starter med småt bogstav)
+	- Abstrakte datatyper (Starter med stort bogstav
+		○ Eksempel "Car myCar = new Car ();
+		○ Array er en abstrakt type, dog kan vi bruge simple typer for erklære, hvilken type Arrayen består af.
+		○ Alle abstrakte datatyper kan nedbrydes til simple datatyper.
+
+
+New laver et nyt objekt
+
+Arrays
+	- Man kan gøre et Array større. Man skal kende den maksimale størrelse af mængden man vil opbevare i Arrayet
+
+Klasser
+	- Erklærer nogle attributter
