@@ -80,6 +80,13 @@ import java.util.ArrayList;
             String name = txfName.getText();
             String title = txfTitle.getText();
             boolean senior = false;
+            if (name.length() >= 0 || title.length() >= 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fuck you");
+                alert.setHeaderText("Fuck you");
+                alert.setContentText("Fuck you");
+                alert.show();
+            }
             if (isSenior.isSelected()) {
                 senior = true;
             } else {
