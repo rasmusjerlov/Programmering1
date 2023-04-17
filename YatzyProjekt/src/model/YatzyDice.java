@@ -4,28 +4,23 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class YatzyDice {
+    // Random number generator.
+    private final Random random = new Random();
     // Face values of the 5 dice.
     // 1 <= values[i] <= 6 for i in [0..4]
     private int[] values = new int[5];
-
     // Number of times the 5 dice have been thrown.
     // 0 <= throwCount <= 3.
     private int throwCount = 0;
 
-    // Random number generator.
-    private final Random random = new Random();
-
-    public YatzyDice() {
-        // Generate random values and set them
-        for (int i = 0; i < values.length; i++) {
-            values[i] = (int) (Math.random() * 6 + 1);
-        }
-    }
 
     /**
      * Return the 5 face values of the dice.
      */
     public int[] getValues() {
+        for (int i = 0; i < values.length; i++) {
+            values[i] = (int) (Math.random() * 6 + 1);
+        }
         return values;
     }
 
@@ -93,12 +88,12 @@ public class YatzyDice {
     // Index 0 is not used.
     // Note: This method can be used in several of the following methods.
     private int[] frequency() {
-        int[] frekvens = new int[7];
+        int[] frequence = new int[7];
         for (int i = 0; i < values.length; i++) {
-            frekvens[values[i]]++;
+            frequence[values[i]]++;
         }
-        System.out.println(Arrays.toString(frekvens));
-        return frekvens;
+        System.out.println(Arrays.toString(frequence));
+        return frequence;
     }
 
     /**
@@ -107,7 +102,7 @@ public class YatzyDice {
      * Pre: 1 <= value <= 6;
      */
     public int sameValuePoints(int value) {
-        int [] frekvens = frequency();
+        int[] frequency = frequency();
         int valSum = 0;
         for (int i = 0; i < values.length; i++) {
             if (values[i] == value) {
@@ -123,13 +118,13 @@ public class YatzyDice {
      * Return 0, if there aren't 2 dice with the same face value.
      */
     public int onePairPoints() {
-        int[] frekvens = frequency();
+        int[] frequency = frequency();
         int pairCount = 0;
         int sum = 0;
-        for (int i = 0; i < frekvens.length; i++) {
-            if (frekvens[i] >= 2) {
+        for (int i = 0; i < frequency.length; i++) {
+            if (frequency[i] >= 2) {
                 sum = i * 2;
-                pairCount ++;
+                pairCount++;
             }
 
         }
@@ -145,11 +140,11 @@ public class YatzyDice {
      * and 2 other dice with the same but different face value.
      */
     public int twoPairPoints() {
-        int[] dice = frequency();
+        int[] frequency = frequency();
         int sum = 0;
         int pairs = 0;
-        for (int i = 1; i < dice.length; i++) {
-            if (dice[i] >= 2) {
+        for (int i = 1; i < frequency.length; i++) {
+            if (frequency[i] >= 2) {
                 sum += i * 2;
                 pairs++;
             }
@@ -172,10 +167,9 @@ public class YatzyDice {
         for (int i = 0; i < frekvens.length; i++) {
             if (frekvens[i] >= 3) {
                 sum = i * 3;
-                pairCount ++;
+                pairCount++;
             }
         }
-        System.out.println("Three same points: " + sum);
         return sum;
     }
 
@@ -190,11 +184,10 @@ public class YatzyDice {
         for (int i = 0; i < frekvens.length; i++) {
             if (frekvens[i] >= 4) {
                 sum = i * 4;
-                pairCount ++;
+                pairCount++;
             }
 
         }
-        System.out.println("Four same points: " + sum);
         return sum;
     }
 
@@ -204,8 +197,25 @@ public class YatzyDice {
      * and 2 other dice with the same but different face value.
      */
     public int fullHousePoints() {
-        // TODO
-        return 0;
+        int[] frequency = frequency();
+        boolean twoPairs = false;
+        boolean threePairs = false;
+        int sum = 0;
+        for (int i = 0; i < frequency.length; i++) {
+            if (frequency[i] == 2) {
+                twoPairs = true;
+                sum += i * 2;
+            }
+            if (frequency[i] == 3) {
+                threePairs = true;
+                sum += i * 3;
+            }
+        }
+        if (twoPairs && threePairs) {
+            return sum;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -213,7 +223,9 @@ public class YatzyDice {
      * Return 0, if the dice aren't showing 1,2,3,4,5.
      */
     public int smallStraightPoints() {
-        // TODO
+        if (frequency()[1] == 1 && frequency()[2] == 1 && frequency()[3] == 1 && frequency()[4] == 1 && frequency()[5] == 1) {
+            return 15;
+        }
         return 0;
     }
 
@@ -222,7 +234,9 @@ public class YatzyDice {
      * Return 0, if the dice aren't showing 2,3,4,5,6.
      */
     public int largeStraightPoints() {
-        // TODO
+        if (frequency()[2] == 1 && frequency()[3] == 1 && frequency()[4] == 1 && frequency()[5] == 1 && frequency()[6] == 1) {
+            return 20;
+        }
         return 0;
     }
 
@@ -234,8 +248,6 @@ public class YatzyDice {
         for (int i = 0; i < values.length; i++) {
             sum += values[i];
         }
-        System.out.println("Chance: " + sum);
-        // TODO
         return sum;
     }
 
@@ -252,7 +264,6 @@ public class YatzyDice {
             }
 
         }
-        System.out.println("Yatsy: " + sum);
         return sum;
     }
 }
