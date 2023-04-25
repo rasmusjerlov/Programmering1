@@ -40,7 +40,7 @@ public class Storage {
     }
 
     public static ArrayList<Customer> getCustomers() {
-        return new ArrayList<>(customers);
+        return new ArrayList<Customer>(customers);
     }
 
     public static void addCustomer(Customer customer) {

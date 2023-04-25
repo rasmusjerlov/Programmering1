@@ -4,11 +4,12 @@ import application.controller.Controller;
 import application.model.Company;
 import application.model.Customer;
 import javafx.beans.value.ChangeListener;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -63,14 +64,17 @@ public class CustomerWindow extends Stage {
         cbbCompany.getItems().addAll(Controller.getCompanies());
         cbbCompany.setDisable(true);
 
+        HBox hbxButtons = new HBox(40);
+        pane.add(hbxButtons, 0, 6, 3, 1);
+        hbxButtons.setPadding(new Insets(10, 0, 0, 0));
+        hbxButtons.setAlignment(Pos.BASELINE_CENTER);
+
         Button btnCancel = new Button("Cancel");
-        pane.add(btnCancel, 0, 6);
-        GridPane.setHalignment(btnCancel, HPos.LEFT);
+        hbxButtons.getChildren().add(btnCancel);
         btnCancel.setOnAction(event -> this.cancelAction());
 
         Button btnOK = new Button("OK");
-        pane.add(btnOK, 0, 6);
-        GridPane.setHalignment(btnOK, HPos.RIGHT);
+        hbxButtons.getChildren().add(btnOK);
         btnOK.setOnAction(event -> this.okAction());
 
         lblError = new Label();
@@ -94,16 +98,17 @@ public class CustomerWindow extends Stage {
 
     private void okAction() {
         String name = txfName.getText();
-        Controller.createCustomer(name);
         if (name.length() == 0) {
             lblError.setText("Name is empty");
         } else {
             boolean companyIsSelected = chbCompany.isSelected();
+            Company newCompany = cbbCompany.getSelectionModel().getSelectedItem();
             // Call application.controller methods
-            if (customer != null) {
-                if (companyIsSelected) {
-                    Company newCompany = cbbCompany.getSelectionModel().getSelectedItem();
-                }
+            if (companyIsSelected) {
+                this.customer = Controller.createCustomer(name);
+                Controller.addCustomerToCompany(this.customer, newCompany);
+            } else {
+                Controller.createCustomer(name);
             }
         }
         this.hide();

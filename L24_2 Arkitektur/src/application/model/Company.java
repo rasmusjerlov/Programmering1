@@ -87,7 +87,7 @@ public class Company {
     }
 
     public ArrayList<Customer> getCustomers() {
-        return new ArrayList<>(customers);
+        return new ArrayList<Customer>(customers);
     }
 
     public void addCustomer(Customer customer) {

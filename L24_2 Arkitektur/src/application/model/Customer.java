@@ -20,4 +20,25 @@ public class Customer {
     public String toString() {
         return name;
     }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    /**
+     * Sets the company as this employees company, if they aren't connected
+     *
+     * @param company
+     */
+    public void setCompany(Company company) {
+        if (this.company != company) {
+            Company oldCompany = this.company;
+            if (oldCompany != null) {
+                oldCompany.removeCustomer(this);
+            }
+            this.company = company;
+            if (company != null)
+                company.addCustomer(this);
+        }
+    }
 }

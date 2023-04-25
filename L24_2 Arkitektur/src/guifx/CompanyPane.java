@@ -170,6 +170,7 @@ public class CompanyPane extends GridPane {
         if (company != null) {
             txfName.setText(company.getName());
             txfHours.setText("" + company.getHours());
+
             StringBuilder sb = new StringBuilder();
             for (Employee emp : company.getEmployees()) {
                 sb.append(emp + "\n");
@@ -181,10 +182,12 @@ public class CompanyPane extends GridPane {
                 cs.append(cust + "\n");
             }
             txaCustomers.setText(cs.toString());
+
         } else {
             txfName.clear();
             txfHours.clear();
             txaEmps.clear();
+            txaCustomers.clear();
         }
     }
 

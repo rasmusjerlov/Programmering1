@@ -26,8 +26,6 @@ public class App {
 
         Controller.createEmployee("Rita Uphill", 300);
 
-        Controller.createCustomer("Rasmus");
-        Controller.createCustomer("Mikkel");
         Controller.createCustomer("Klark", c1);
         Controller.createCustomer("Anders", c1);
         Controller.createCustomer("Faggel", c1);
