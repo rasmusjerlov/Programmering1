@@ -4,6 +4,7 @@ import application.controller.Controller;
 import application.model.Company;
 import application.model.Customer;
 import javafx.beans.value.ChangeListener;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,9 +18,11 @@ import javafx.stage.StageStyle;
 public class CustomerWindow extends Stage {
 
     private Customer customer;
+    private Company company;
     private CheckBox chbCompany;
     private ComboBox<Company> cbbCompany;
     private TextField txfName;
+    private ListView lvwCustomers;
     private Label lblError;
 
     public CustomerWindow(String title, Customer customer) {
@@ -65,7 +68,7 @@ public class CustomerWindow extends Stage {
         cbbCompany.setDisable(true);
 
         HBox hbxButtons = new HBox(40);
-        pane.add(hbxButtons, 0, 6, 3, 1);
+        pane.add(hbxButtons, 0, 8, 3, 1);
         hbxButtons.setPadding(new Insets(10, 0, 0, 0));
         hbxButtons.setAlignment(Pos.BASELINE_CENTER);
 
@@ -76,6 +79,14 @@ public class CustomerWindow extends Stage {
         Button btnOK = new Button("OK");
         hbxButtons.getChildren().add(btnOK);
         btnOK.setOnAction(event -> this.okAction());
+
+        Label option = new Label("Or choose from the list below");
+        pane.add(option, 0, 6);
+        GridPane.setHalignment(option, HPos.LEFT);
+
+        lvwCustomers = new ListView<>();
+        pane.add(lvwCustomers, 0, 7);
+        lvwCustomers.getItems().setAll(Controller.getCustomers());
 
         lblError = new Label();
         pane.add(lblError, 0, 5);
@@ -117,5 +128,7 @@ public class CustomerWindow extends Stage {
     private void selectedCompanyChanged(boolean checked) {
         cbbCompany.setDisable(!checked);
     }
+
+
 }
 

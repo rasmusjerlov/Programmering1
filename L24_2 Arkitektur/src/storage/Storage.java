@@ -39,12 +39,12 @@ public class Storage {
         employees.remove(employee);
     }
 
-    public static ArrayList<Customer> getCustomers() {
-        return new ArrayList<Customer>(customers);
-    }
-
     public static void addCustomer(Customer customer) {
         customers.add(customer);
+    }
+
+    public static ArrayList<Customer> getCustomers() {
+        return new ArrayList<Customer>(customers);
     }
 
     public static void removeCustomer(Customer customer) {

@@ -35,7 +35,7 @@ public class CompanyPane extends GridPane {
         lvwCompanies.setPrefHeight(200);
         lvwCompanies.getItems().setAll(Controller.getCompanies());
 
-        ChangeListener<Company> listener = (ov, oldCompny, newCompany) -> this.selectedCompanyChanged();
+        ChangeListener<Company> listener = (ov, oldCompany, newCompany) -> this.selectedCompanyChanged();
         lvwCompanies.getSelectionModel().selectedItemProperty().addListener(listener);
 
         Label lblName = new Label("Name:");

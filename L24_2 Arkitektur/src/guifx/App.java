@@ -9,6 +9,8 @@ public class App {
     public static void main(String[] args) {
         initStorage();
         Application.launch(StartWindow.class);
+        System.out.println(Controller.getCustomers());
+        System.out.println(Controller.getCompanies());
     }
 
     /**

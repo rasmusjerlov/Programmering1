@@ -114,13 +114,13 @@ public class Controller {
 
     public static Customer createCustomer(String name) {
         Customer customer = new Customer(name);
-        customer.setName(name);
         Storage.addCustomer(customer);
         return customer;
     }
 
     public static Customer createCustomer(String name, Company company) {
         Customer customer = new Customer(name);
+        Storage.addCustomer(customer);
         company.addCustomer(customer);
         return customer;
     }
@@ -135,8 +135,12 @@ public class Controller {
         }
     }
 
-    public static ArrayList<Customer> getCustomers(Company company) {
+    public static ArrayList<Customer> getCompanyCustomers(Company company) {
         return company.getCustomers();
+    }
+
+    public static ArrayList<Customer> getCustomers() {
+        return Storage.getCustomers();
     }
 
 
