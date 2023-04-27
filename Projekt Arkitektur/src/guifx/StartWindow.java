@@ -16,17 +16,18 @@ import storage.Storage;
 import java.time.LocalDate;
 
 public class StartWindow extends Application {
-    private ListView lvwForestillinger, lvwKunder;
-    private Label lblForestillinger, lblKunder;
+    private ListView lvwForestillinger, lvwKunder, lvwPladser;
+    private Label lblForestillinger, lblKunder, lblPladser, lblBestillingDato;
     private TextField forestillingNavnTXF, forestillingStartTXF, forestillingSlutTXF;
     private TextField kundeNavnTXF, kundeMobilTXF;
-    private Button opretForestilling, opretKunde;
+    private TextField bestillingDatoTXF;
+    private Button opretForestilling, opretKunde, opretBestilling;
     private String startDate, endDate;
     private LocalDate dateStart, dateEnd;
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Teateer bestillinger");
+        stage.setTitle("Teater bestillinger");
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -51,16 +52,26 @@ public class StartWindow extends Application {
 
         lvwKunder = new ListView<>();
         lvwKunder.setEditable(false);
-        lvwKunder.setPrefWidth(250);
+        lvwKunder.setPrefWidth(200);
         pane.add(lvwKunder, 1, 1);
+
+        lvwPladser = new ListView<>();
+        lvwPladser.setEditable(false);
+        lvwPladser.setPrefWidth(300);
+        pane.add(lvwPladser, 2, 1);
 
         lblKunder = new Label("Kunder");
         pane.add(lblKunder, 1, 0);
+
         lblForestillinger = new Label("Forestillinger");
         pane.add(lblForestillinger, 0, 0);
 
+        lblPladser = new Label("Pladser");
+        pane.add(lblPladser, 2, 0);
+
         lvwForestillinger.getItems().setAll(Storage.getForestillinger());
         lvwKunder.getItems().setAll(Storage.getKunder());
+        lvwPladser.getItems().setAll(Storage.getPladser());
 
         VBox vbForestillingLBL = new VBox(20);
         vbForestillingLBL.setPadding(new Insets(2, 0, 0, 0));
@@ -101,6 +112,16 @@ public class StartWindow extends Application {
         pane.add(vbKundeLBL, 1, 2);
         pane.add(vbKundeTXF, 1, 2);
 
+        VBox vbBestillingLBL = new VBox();
+        VBox vbBestillingTXF = new VBox();
+        Label lblBestillingDato = new Label("Dato");
+        TextField bestillingDatoTXF = new TextField();
+        vbBestillingLBL.getChildren().add(lblBestillingDato);
+        vbBestillingTXF.getChildren().add(bestillingDatoTXF);
+        pane.add(vbBestillingLBL, 2, 2);
+        pane.add(vbBestillingTXF, 2, 2);
+        vbBestillingTXF.setPadding(new Insets(0, 0, 0, 40));
+
         VBox opretF = new VBox();
         opretForestilling = new Button("Opret forestilling");
         opretF.getChildren().add(opretForestilling);
@@ -109,13 +130,20 @@ public class StartWindow extends Application {
         opretKunde = new Button("Opret kunde");
         opretK.getChildren().add(opretKunde);
 
+        VBox opretB = new VBox();
+        opretBestilling = new Button("Opret bestilling");
+        opretB.getChildren().add(opretBestilling);
+
         pane.add(opretF, 0, 3);
         pane.add(opretK, 1, 3);
+        pane.add(opretB, 2, 3);
         opretF.setPadding(new Insets(0, 0, 0, 40));
         opretK.setPadding(new Insets(0, 0, 0, 80));
+        opretB.setPadding(new Insets(0, 0, 0, 40));
 
         opretForestilling.setOnAction(event -> createForestilling());
         opretKunde.setOnAction(event -> createKunde());
+        opretBestilling.setOnAction(event -> createBestilling());
 
     }
 
@@ -125,6 +153,13 @@ public class StartWindow extends Application {
         LocalDate dateEnd = LocalDate.parse((CharSequence) forestillingSlutTXF.getText());
         Controller.createForestilling(name, dateStart, dateEnd);
         lvwForestillinger.getItems().setAll(Storage.getForestillinger());
+        clearForestilling();
+    }
+
+    public void clearForestilling() {
+        forestillingNavnTXF.clear();
+        forestillingStartTXF.clear();
+        forestillingSlutTXF.clear();
     }
 
 
@@ -133,8 +168,16 @@ public class StartWindow extends Application {
         String mobile = kundeMobilTXF.getText();
         Controller.createKunde(name, mobile);
         lvwKunder.getItems().setAll(Storage.getKunder());
+        clearKunde();
+    }
+
+    public void clearKunde() {
         kundeNavnTXF.clear();
         kundeMobilTXF.clear();
+    }
+
+    public void createBestilling() {
+
     }
 
 }

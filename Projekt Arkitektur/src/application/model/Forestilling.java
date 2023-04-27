@@ -26,8 +26,8 @@ public class Forestilling {
         return end;
     }
 
-    public Bestilling createBestilling(LocalDate date, Kunde kunde) {
-        Bestilling bestilling = new Bestilling(date, this, kunde);
+    public Bestilling createBestilling(Forestilling forestilling, Kunde kunde, LocalDate date) {
+        Bestilling bestilling = new Bestilling(date, forestilling, kunde);
         bestillinger.add(bestilling);
         return bestilling;
     }

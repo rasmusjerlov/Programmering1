@@ -45,11 +45,10 @@ public class Plads {
 
     @Override
     public String toString() {
-        return "Plads{" +
-                "række=" + række +
-                ", nr=" + nr +
-                ", pris=" + pris +
-                ", pladsType=" + pladsType +
-                '}' + "\n";
+        return "Række: " + række +
+                " Plads: " + nr +
+                " Pris: " + pris +
+                " Type: " + pladsType +
+                "\n";
     }
 }

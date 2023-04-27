@@ -1,12 +1,10 @@
 package application.controller;
 
-import application.model.Forestilling;
-import application.model.Kunde;
-import application.model.Plads;
-import application.model.PladsType;
+import application.model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Controller {
     public static Kunde createKunde(String name, String mobil) {
@@ -25,5 +23,11 @@ public class Controller {
         Plads plads = new Plads(række, nr, pris, pladsType);
         Storage.addPlads(plads);
         return plads;
+    }
+
+    public static Bestilling opretBestillingMedPladser(Forestilling forestilling, Kunde kunde, LocalDate date, ArrayList<Plads> pladser) {
+        Bestilling bestilling = new Bestilling(forestilling, kunde, date, pladser);
+        Storage.addBestilling(bestilling);
+        return bestilling;
     }
 }
