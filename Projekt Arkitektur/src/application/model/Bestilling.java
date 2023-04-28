@@ -4,32 +4,45 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Bestilling {
+    private final ArrayList<Plads> pladser = new ArrayList<>();
+    private LocalDate dato;
     private Forestilling forestilling;
     private Kunde kunde;
-    private LocalDate date;
-    private ArrayList<Plads> pladser = new ArrayList<>();
 
-    public Bestilling(LocalDate date, Forestilling forestilling, Kunde kunde) {
+    public Bestilling(LocalDate dato, Forestilling forestilling, Kunde kunde) {
+        this.dato = dato;
         this.forestilling = forestilling;
-        this.date = date;
         this.kunde = kunde;
         kunde.addBestilling(this);
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getDato() {
+        return dato;
     }
 
     public Forestilling getForestilling() {
         return forestilling;
     }
 
-    public ArrayList<Plads> getPladser() {
-        return new ArrayList<>(pladser);
-    }
-
     public Kunde getKunde() {
         return kunde;
     }
 
+    public ArrayList<Plads> getPladser() {
+        return new ArrayList<>(pladser);
+    }
+
+    public void addPlads(Plads plads) {
+        if (!pladser.contains(plads)) {
+            pladser.add(plads);
+        }
+    }
+
+    public int samletPris() {
+        int samlet = 0;
+        for (Plads s : getPladser()) {
+            samlet += s.getPris();
+        }
+        return samlet;
+    }
 }
