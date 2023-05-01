@@ -1,4 +1,4 @@
-package model;
+package model2;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,6 @@ public class Swimmer {
     private String club;
     private int yearGroup;
     private ArrayList<Double> lapTimes;
-    private TrainingPlan trainingPlan;
 
     /**
      * Initialize a new swimmer with name, club, yearGroup, and lap times.
@@ -66,27 +65,13 @@ public class Swimmer {
         return best;
     }
 
-    public TrainingPlan getTrainingPlan() {
-        return trainingPlan;
-    }
-
-    public void setTrainingPlan(TrainingPlan trainingPlan) {
-        if (this.trainingPlan != trainingPlan) {
-            this.trainingPlan = trainingPlan;
-        }
-    }
-
-    public int allTrainingHours() {
-        return this.getTrainingPlan().getWeeklyWaterHours();
-    }
-
     @Override
     public String toString() {
         return "Swimmer{" +
                 "name='" + name + '\'' +
                 ", club='" + club + '\'' +
                 ", yearGroup=" + yearGroup +
-                ", trainingPlan=" + trainingPlan +
+                ", lapTimes=" + lapTimes +
                 '}';
     }
 }

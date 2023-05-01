@@ -45,4 +45,12 @@ public class Bestilling {
         }
         return samlet;
     }
+
+    @Override
+    public String toString() {
+        return forestilling.getNavn() +
+                " " + dato +
+                ", " + pladser.size() + " Pladser " +
+                "kr " + samletPris();
+    }
 }

@@ -1,5 +1,6 @@
 package application.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Kunde {
@@ -31,9 +32,18 @@ public class Kunde {
         return new ArrayList<>(bestillinger);
     }
 
-    public void addBestilling(Bestilling bestilling) {
+    void addBestilling(Bestilling bestilling) {
         if (!bestillinger.contains(bestilling)) {
             bestillinger.add(bestilling);
         }
+    }
+
+    public ArrayList<Plads> bestiltePladserTilForestillingPåDag(Forestilling forestilling, LocalDate dato) {
+        ArrayList<Plads> bestiltePladser = new ArrayList<>();
+        for (Bestilling bestilling : bestillinger) {
+            if (bestilling.getForestilling() == forestilling && bestilling.getDato().equals(dato))
+                bestiltePladser.addAll(bestilling.getPladser());
+        }
+        return bestiltePladser;
     }
 }

@@ -31,7 +31,7 @@ public class Plads {
 
     @Override
     public String toString() {
-        return  "Rk " + række +
+        return "Rk " + række +
                 " nr:" + nr +
                 " (kr " + pris +
                 " " + pladsType +

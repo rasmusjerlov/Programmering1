@@ -2,7 +2,6 @@ package guifx;
 
 import application.controller.Controller;
 import application.model.Forestilling;
-import application.model.Kunde;
 import application.model.PladsType;
 import javafx.application.Application;
 
@@ -19,9 +18,9 @@ public class App {
         Forestilling f2 = Controller.createForestilling("Lykke per", LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 10));
         Forestilling f3 = Controller.createForestilling("Chess", LocalDate.of(2023, 8, 21), LocalDate.of(2023, 8, 30));
 
-        Kunde k1 = Controller.createKunde("Anders Hansen", "11223344");
-        Kunde k2 = Controller.createKunde("Peter Jensen", "12345678");
-        Kunde k3 = Controller.createKunde("Niels Madsen", "12341234");
+        Controller.createKunde("Anders Hansen", "11223344");
+        Controller.createKunde("Peter Jensen", "12345678");
+        Controller.createKunde("Niels Madsen", "12341234");
 
         int pris;
         PladsType type = PladsType.STANDARD;

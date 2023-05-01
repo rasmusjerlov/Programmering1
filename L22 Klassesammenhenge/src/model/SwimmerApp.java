@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class SwimmerApp {
-    
+
     public static void main(String[] args) {
 
         ArrayList<Double> lapTimes = new ArrayList<>();
@@ -35,7 +35,7 @@ public class SwimmerApp {
         lapTimes.add(1.06);
         lapTimes.add(1.03);
         Swimmer s3 = new Swimmer("Mikkel", 1993, lapTimes, "AIA-Tranbjerg");
-        
+
         ArrayList<Swimmer> swimmers = new ArrayList<>();
         swimmers.add(s1);
         swimmers.add(s2);
@@ -44,7 +44,18 @@ public class SwimmerApp {
         for (Swimmer s : swimmers) {
             System.out.println(s.getName() + "'s bedste tid: " + s.bestLapTime());
         }
+        TrainingPlan t1 = new TrainingPlan('a', 16, 10);
+        TrainingPlan t2 = new TrainingPlan('b', 10, 6);
 
+        s1.setTrainingPlan(t1);
+        s2.setTrainingPlan(t1);
+        s3.setTrainingPlan(t2);
+
+        s1.allTrainingHours();
+        s2.allTrainingHours();
+        s3.allTrainingHours();
+        System.out.print("Svømmerne træner i alt ");
+        System.out.println(s1.allTrainingHours() + s2.allTrainingHours() + s3.allTrainingHours() + " timer om ugen");
     }
-    
+
 }

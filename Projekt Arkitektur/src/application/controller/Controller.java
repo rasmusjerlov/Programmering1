@@ -20,7 +20,7 @@ public class Controller {
     }
 
     public static Plads createPlads(int række, int nr, int pris, PladsType pladsType) {
-        Plads plads = new Plads(række, nr, pris ,pladsType);
+        Plads plads = new Plads(række, nr, pris, pladsType);
         Storage.addPlads(plads);
         return plads;
     }

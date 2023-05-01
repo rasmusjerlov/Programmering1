@@ -66,11 +66,18 @@ public class BestillingWindow extends Stage {
             cbbPladser.getItems().addAll(bestilling.getPladser());
             cbbPladser.getSelectionModel().select(0);
 
+            Label lblPris = new Label("Samlet pris");
+            pane.add(lblPris, 0, 4);
+
+            TextField txfPris = new TextField("kr " + bestilling.samletPris());
+            txfPris.setEditable(false);
+            pane.add(txfPris, 1, 4);
+
             Label lblOprettet = new Label("Bestilling oprettet");
             lblOprettet.setStyle("-fx-text-fill: green");
-            pane.add(lblOprettet, 0, 4);
+            pane.add(lblOprettet, 0, 5);
         } else {
-            Label lblError = new Label("Ugyldigt input");
+            Label lblError = new Label("Pladser ikke ledige på dagen");
             lblError.setStyle("-fx-text-fill: red");
             pane.add(lblError, 0, 0);
         }

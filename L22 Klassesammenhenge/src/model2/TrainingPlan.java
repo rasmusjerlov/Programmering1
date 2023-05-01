@@ -1,4 +1,4 @@
-package model;
+package model2;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ public class TrainingPlan {
     private int weeklyWaterHours;
     private int weeklyStrengthHours;
     private ArrayList<Swimmer> swimmers = new ArrayList<>();
+    private Swimmer swimmer;
 
     public TrainingPlan(char level, int weeklyWaterHours, int weeklyStrengthHours) {
         this.level = level;
@@ -41,4 +42,20 @@ public class TrainingPlan {
         this.weeklyWaterHours = weeklyWaterHours;
     }
 
+    public Swimmer getSwimmers() {
+        return swimmer;
+    }
+
+    public void setSwimmers(Swimmer swimmer) {
+        if (this.swimmer != swimmer) {
+            this.swimmer = swimmer;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "TrainingPlan{" +
+                "swimmer=" + swimmer.toString() +
+                '}';
+    }
 }

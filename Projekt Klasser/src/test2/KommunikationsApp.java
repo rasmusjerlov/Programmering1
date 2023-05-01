@@ -1,7 +1,7 @@
 package test2;
-import model2.Team;
+
 import model2.Student;
-import java.util.Arrays;
+import model2.Team;
 
 import java.util.Scanner;
 
