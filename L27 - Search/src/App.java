@@ -5,7 +5,7 @@ public class App {
     private static int[] exercise2 = {7, 56, 34, 3, 7, 14, 13, 4};
     private static int[] exercise3 = {7, 9, 13, 7, 9, 13};
     private static int[] exercise3x1 = {7, 9, 13, 13, 9, 7};
-    private static int[] exercise3x2 = {1, 3, 5, 5, 5, 3, 7, 9, 3};
+    private static int[] exercise3x2 = {1, 3, 5, 5, 5, 3, 3};
     private static ArrayList<Integer> numbers = new ArrayList<>();
     private static ArrayList<Player> players = new ArrayList<>();
     private static ArrayList<String> list = new ArrayList<>();
@@ -37,6 +37,7 @@ public class App {
         System.out.println(firstInInterval(exercise2));
         System.out.println(twoSame(exercise3));
         System.out.println(twoSame(exercise3x1));
+        System.out.println("Exercise 3.1");
         System.out.println(twoSame2(exercise3x2, 3));
         list.add("Rasmus");
         list.add("Emil");
@@ -143,6 +144,8 @@ public class App {
                 int k1 = numbers[j + 1];
                 if (k1 == k) {
                     count++;
+                } else {
+                    count = 0;
                 }
             }
         }
