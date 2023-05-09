@@ -1,4 +1,4 @@
-package model;
+package application.model;
 
 public class Deltager {
     private String navn, telefon, nationalitet;
