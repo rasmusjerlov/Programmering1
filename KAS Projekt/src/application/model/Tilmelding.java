@@ -1,6 +1,7 @@
 package application.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Tilmelding {
     private Hotel hotel;
@@ -8,14 +9,27 @@ public class Tilmelding {
     private int nummer;
     private LocalDate ankomst, afrejse;
     private Deltager deltager;
+    private ArrayList<Udflugt> udflugter = new ArrayList<>();
 
-    public Tilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse, Deltager deltager) {
+    public Tilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
+                      Deltager deltager) {
         this.hotel = hotel;
         this.udflugt = udflugt;
         this.nummer = nummer;
         this.ankomst = ankomst;
         this.afrejse = afrejse;
         this.deltager = deltager;
+    }
+
+    public ArrayList<Udflugt> getUdflugter() {
+        return new ArrayList<Udflugt>(udflugter);
+    }
+
+    public void addUdflugt(Udflugt udflugt) {
+        if (!udflugter.contains(udflugt)) {
+            udflugter.add(udflugt);
+            udflugt.addTilmelding(this);
+        }
     }
 
     public Hotel getHotel() {
@@ -40,5 +54,14 @@ public class Tilmelding {
 
     public Deltager getDeltager() {
         return deltager;
+    }
+
+    /**
+     * Sets the group as this person's group.
+     */
+    public void setDeltager(Deltager deltager) {
+        if (this.deltager != deltager) {
+            this.deltager = deltager;
+        }
     }
 }

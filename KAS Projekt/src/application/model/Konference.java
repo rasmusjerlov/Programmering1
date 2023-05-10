@@ -1,5 +1,7 @@
 package application.model;
 
+import storage.Storage;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -22,6 +24,26 @@ public class Konference {
         tilmeldinger.add(tilmelding);
     }
 
+    public static void addUdflugt(Udflugt udflugt) {
+        udflugter.add(udflugt);
+    }
+
+    public static void addHotel(Hotel hotel) {
+        hoteller.add(hotel);
+    }
+
+    public static void addTilmelding(Tilmelding tilmelding) {
+        tilmeldinger.add(tilmelding);
+    }
+
+    public static Tilmelding createTilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
+                                              Deltager deltager) {
+        Tilmelding tilmelding = new Tilmelding(hotel, udflugt, nummer, ankomst, afrejse, deltager);
+        tilmeldinger.add(tilmelding);
+        Storage.addTilmelding(tilmelding);
+        return tilmelding;
+    }
+
     public LocalDate getStart() {
         return start;
     }
@@ -42,7 +64,7 @@ public class Konference {
         return antalDeltagere;
     }
 
-    public ArrayList<Tilmelding> getDeltagere() {
+    public ArrayList<Tilmelding> getTilmeldinger() {
         return tilmeldinger;
     }
 

@@ -12,13 +12,23 @@ public class Controller {
         return konference;
     }
 
-    public static Tilmelding createTilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse, Deltager deltager) {
-        Tilmelding tilmelding = new Tilmelding(hotel, udflugt, nummer, ankomst, afrejse, deltager);
-        Storage.addTilmelding(tilmelding);
-        return tilmelding;
+
+    public static Deltager createDeltager(String navn, String telefon, String nationalitet, boolean firma,
+                                          boolean ledsager, Rolle rolle) {
+        Deltager deltager = new Deltager(navn, telefon, nationalitet, firma, ledsager, rolle);
+        Storage.addDeltager(deltager);
+        return deltager;
     }
 
-    public static void createDeltager(String navn, String telefon, String nationalitet, boolean firma, boolean ledsager, Rolle rolle) {
-        Deltager deltager = new Deltager(navn, telefon, nationalitet, firma, ledsager, rolle);
+    public static Udflugt createUdflugt(String tidspunkt, String mødested, int pris) {
+        Udflugt udflugt = new Udflugt(tidspunkt, mødested, pris);
+        Konference.addUdflugt(udflugt);
+        return udflugt;
+    }
+
+    public static Hotel createhotel(String name, String phone, int pricePerDay) {
+        Hotel hotel = new Hotel(name, phone, pricePerDay);
+        Konference.addHotel(hotel);
+        return hotel;
     }
 }

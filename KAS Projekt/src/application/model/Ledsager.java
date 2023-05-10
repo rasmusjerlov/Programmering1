@@ -2,12 +2,10 @@ package application.model;
 
 public class Ledsager {
     private String navn, telefon;
-    private Deltager deltager;
 
-    public Ledsager(String navn, String telefon, Deltager deltager) {
+    public Ledsager(String navn, String telefon) {
         this.navn = navn;
         this.telefon = telefon;
-        this.deltager = deltager;
     }
 
     public String getNavn() {
@@ -26,11 +24,4 @@ public class Ledsager {
         this.telefon = telefon;
     }
 
-    public Deltager getDeltager() {
-        return deltager;
-    }
-
-    public void setDeltager(Deltager deltager) {
-        this.deltager = deltager;
-    }
 }

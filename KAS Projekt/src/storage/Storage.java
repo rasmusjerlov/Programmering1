@@ -18,4 +18,8 @@ public class Storage {
     public static void addTilmelding(Tilmelding tilmelding) {
         tilmeldinger.add(tilmelding);
     }
+
+    public static void addDeltager(Deltager deltager) {
+        deltagere.add(deltager);
+    }
 }

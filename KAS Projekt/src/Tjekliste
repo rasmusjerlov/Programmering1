@@ -1,0 +1,9 @@
+Sammenhænge tjekliste
+
+DONE    Deltager -> Ledsager
+DONE    Konference -> Tilmeldinger
+//DONE    Udflugt -> Tilmeldinger
+MANGLER Konference -> Hotel & Udflugt
+MANGLER Hotel -> Tilkøb
+MANGLER Tilmelding -> Deltager
+MANGLER Hotel - Tilmelding
