@@ -2,8 +2,8 @@ Sammenhænge tjekliste
 
 DONE    Deltager -> Ledsager
 DONE    Konference -> Tilmeldinger
-//DONE    Udflugt -> Tilmeldinger
-MANGLER Konference -> Hotel & Udflugt
-MANGLER Hotel -> Tilkøb
-MANGLER Tilmelding -> Deltager
+DONE    Udflugt -> Tilmeldinger
+DONE    Konference -> Hotel & Udflugt
+DONE    Hotel -> Tilkøb
+DONE    Tilmelding -> Deltager
 MANGLER Hotel - Tilmelding

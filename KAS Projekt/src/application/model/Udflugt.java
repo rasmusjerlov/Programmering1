@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Udflugt {
     private String tidspunkt, mødested;
     private int pris;
-    private ArrayList<Ledsager> ledsagere;
+    private ArrayList<Ledsager> ledsagere = new ArrayList<>();
     private ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
 
     public Udflugt(String tidspunkt, String mødested, int pris) {
@@ -22,6 +22,13 @@ public class Udflugt {
         if (!tilmeldinger.contains(tilmelding)) {
             tilmeldinger.add(tilmelding);
             tilmelding.addUdflugt(this);
+        }
+    }
+
+    public void removeTilmelding(Tilmelding tilmelding) {
+        if (tilmeldinger.contains(tilmelding)) {
+            tilmeldinger.remove(tilmelding);
+            tilmelding.removeUdflugt(this);
         }
     }
 

@@ -9,7 +9,7 @@ public class Tilmelding {
     private int nummer;
     private LocalDate ankomst, afrejse;
     private Deltager deltager;
-    private ArrayList<Udflugt> udflugter = new ArrayList<>();
+    private ArrayList<Udflugt> udflugter;
 
     public Tilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
                       Deltager deltager) {
@@ -24,11 +24,19 @@ public class Tilmelding {
     public ArrayList<Udflugt> getUdflugter() {
         return new ArrayList<Udflugt>(udflugter);
     }
+    
 
     public void addUdflugt(Udflugt udflugt) {
         if (!udflugter.contains(udflugt)) {
             udflugter.add(udflugt);
             udflugt.addTilmelding(this);
+        }
+    }
+
+    public void removeUdflugt(Udflugt udflugt) {
+        if (udflugter.contains(udflugt)) {
+            udflugter.remove(udflugt);
+            udflugt.removeTilmelding(this);
         }
     }
 
@@ -59,9 +67,4 @@ public class Tilmelding {
     /**
      * Sets the group as this person's group.
      */
-    public void setDeltager(Deltager deltager) {
-        if (this.deltager != deltager) {
-            this.deltager = deltager;
-        }
-    }
 }

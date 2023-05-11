@@ -6,6 +6,7 @@ public class Hotel {
     private String name, phone;
     private int pricePerDay;
     private ArrayList<Deltager> reservationer;
+    private ArrayList<Tilkøb> tilkøbt;
     private boolean dobbeltVærelse;
 
     public Hotel(String name, String phone, int pricePerDay) {
@@ -32,5 +33,11 @@ public class Hotel {
 
     public boolean isDobbeltVærelse() {
         return dobbeltVærelse;
+    }
+
+    public Tilkøb createTilkøb(String navn, int pris) {
+        Tilkøb tilkøb = new Tilkøb(navn, pris);
+        tilkøbt.add(tilkøb);
+        return tilkøb;
     }
 }

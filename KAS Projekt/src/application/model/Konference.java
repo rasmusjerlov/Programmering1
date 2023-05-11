@@ -20,28 +20,48 @@ public class Konference {
         this.navn = navn;
     }
 
-    public static void addDeltager(Tilmelding tilmelding) {
-        tilmeldinger.add(tilmelding);
+    public static void addHotel(Hotel hotel) {
+        if (!hoteller.contains(hotel)) {
+            hoteller.add(hotel);
+        }
     }
 
     public static void addUdflugt(Udflugt udflugt) {
-        udflugter.add(udflugt);
+        if (!udflugter.contains(udflugt)) {
+            udflugter.add(udflugt);
+        }
     }
 
-    public static void addHotel(Hotel hotel) {
-        hoteller.add(hotel);
+    public void addTilmelding(Tilmelding tilmelding) {
+        if (!tilmeldinger.contains(tilmelding)) {
+            tilmeldinger.add(tilmelding);
+        }
     }
 
-    public static void addTilmelding(Tilmelding tilmelding) {
-        tilmeldinger.add(tilmelding);
-    }
-
-    public static Tilmelding createTilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
-                                              Deltager deltager) {
+    public Tilmelding createTilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
+                                       Deltager deltager) {
         Tilmelding tilmelding = new Tilmelding(hotel, udflugt, nummer, ankomst, afrejse, deltager);
         tilmeldinger.add(tilmelding);
         Storage.addTilmelding(tilmelding);
         return tilmelding;
+    }
+
+    public Udflugt createUdflugt(String tidspunkt, String mødested, int pris) {
+        Udflugt udflugt = new Udflugt(tidspunkt, mødested, pris);
+        udflugter.add(udflugt);
+        return udflugt;
+    }
+
+    public Hotel createHotel(String name, String phone, int pricePerDay) {
+        Hotel hotel = new Hotel(name, phone, pricePerDay);
+        hoteller.add(hotel);
+        return hotel;
+    }
+
+    public void removeUdflugt(Udflugt udflugt) {
+        if (udflugter.contains(udflugt)) {
+            udflugter.remove(udflugt);
+        }
     }
 
     public LocalDate getStart() {
@@ -69,7 +89,7 @@ public class Konference {
     }
 
     public ArrayList<Udflugt> getUdflugter() {
-        return udflugter;
+        return new ArrayList<>(udflugter);
     }
 
     public ArrayList<Hotel> getHoteller() {

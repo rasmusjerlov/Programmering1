@@ -6,13 +6,6 @@ import storage.Storage;
 import java.time.LocalDate;
 
 public class Controller {
-    public static Konference createKonference(LocalDate start, LocalDate slut, String lokation, String navn) {
-        Konference konference = new Konference(start, slut, lokation, navn);
-        Storage.addKonference(konference);
-        return konference;
-    }
-
-
     public static Deltager createDeltager(String navn, String telefon, String nationalitet, boolean firma,
                                           boolean ledsager, Rolle rolle) {
         Deltager deltager = new Deltager(navn, telefon, nationalitet, firma, ledsager, rolle);
@@ -30,5 +23,11 @@ public class Controller {
         Hotel hotel = new Hotel(name, phone, pricePerDay);
         Konference.addHotel(hotel);
         return hotel;
+    }
+
+    public Konference createKonference(LocalDate start, LocalDate slut, String lokation, String navn) {
+        Konference konference = new Konference(start, slut, lokation, navn);
+        Storage.addKonference(konference);
+        return konference;
     }
 }
