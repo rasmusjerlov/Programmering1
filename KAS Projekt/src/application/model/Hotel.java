@@ -6,6 +6,7 @@ public class Hotel {
     private String name, phone;
     private int pricePerDay;
     private ArrayList<Deltager> reservationer;
+    private ArrayList<Tilmelding> tilmeldinger;
     private ArrayList<Tilkøb> tilkøbt;
     private boolean dobbeltVærelse;
 
@@ -13,6 +14,20 @@ public class Hotel {
         this.name = name;
         this.phone = phone;
         this.pricePerDay = pricePerDay;
+    }
+
+    public void addTilmelding(Tilmelding tilmelding) {
+        if (!tilmeldinger.contains(tilmelding)) {
+            tilmeldinger.add(tilmelding);
+            tilmelding.setHotel(this);
+        }
+    }
+
+    public void removeTilmelding(Tilmelding tilmelding) {
+        if (tilmeldinger.contains(tilmelding)) {
+            tilmeldinger.remove(tilmelding);
+            tilmelding.setHotel(this);
+        }
     }
 
     public String getName() {
@@ -25,6 +40,10 @@ public class Hotel {
 
     public int getPricePerDay() {
         return pricePerDay;
+    }
+
+    public void setPricePerDay(int pricePerDay) {
+        this.pricePerDay = pricePerDay;
     }
 
     public ArrayList<Deltager> getReservationer() {

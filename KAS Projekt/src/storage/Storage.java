@@ -7,9 +7,9 @@ import application.model.Tilmelding;
 import java.util.ArrayList;
 
 public class Storage {
-    private static ArrayList<Konference> konferencer;
-    private static ArrayList<Tilmelding> tilmeldinger;
-    private static ArrayList<Deltager> deltagere;
+    private static ArrayList<Konference> konferencer = new ArrayList<>();
+    private static ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
+    private static ArrayList<Deltager> deltagere = new ArrayList<>();
 
     public static void addKonference(Konference konference) {
         konferencer.add(konference);

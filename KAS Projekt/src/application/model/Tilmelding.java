@@ -24,7 +24,7 @@ public class Tilmelding {
     public ArrayList<Udflugt> getUdflugter() {
         return new ArrayList<Udflugt>(udflugter);
     }
-    
+
 
     public void addUdflugt(Udflugt udflugt) {
         if (!udflugter.contains(udflugt)) {
@@ -42,6 +42,23 @@ public class Tilmelding {
 
     public Hotel getHotel() {
         return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        if (this.hotel != hotel) {
+            Hotel oldHotel = this.hotel;
+            if (oldHotel != null) {
+                oldHotel.removeTilmelding(this);
+            }
+            this.hotel = hotel;
+            if (hotel != null) {
+                hotel.addTilmelding(this);
+            }
+        }
+        if (this.getDeltager().isHasLedsager() == true) {
+            hotel.setPricePerDay(hotel.getPricePerDay() + 200);
+            hotel.isDobbeltVærelse();
+        }
     }
 
     public Udflugt getUdflugt() {

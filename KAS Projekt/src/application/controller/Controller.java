@@ -25,8 +25,8 @@ public class Controller {
         return hotel;
     }
 
-    public Konference createKonference(LocalDate start, LocalDate slut, String lokation, String navn) {
-        Konference konference = new Konference(start, slut, lokation, navn);
+    public static Konference createKonference(LocalDate start, LocalDate slut, String lokation, String navn, int pris) {
+        Konference konference = new Konference(start, slut, lokation, navn, pris);
         Storage.addKonference(konference);
         return konference;
     }
