@@ -3,17 +3,17 @@ package application.model;
 import java.util.ArrayList;
 
 public class Hotel {
-    private String name, phone;
-    private int pricePerDay;
-    private ArrayList<Deltager> reservationer;
-    private ArrayList<Tilmelding> tilmeldinger;
-    private ArrayList<Tilkøb> tilkøbt;
+    private String navn, telefon;
+    private int prisPerDag;
+    private ArrayList<Deltager> reservationer = new ArrayList<>();
+    private ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
+    private ArrayList<Tilkøb> tilkøbt = new ArrayList<>();
     private boolean dobbeltVærelse;
 
-    public Hotel(String name, String phone, int pricePerDay) {
-        this.name = name;
-        this.phone = phone;
-        this.pricePerDay = pricePerDay;
+    public Hotel(String name, String phone, int prisPerDag) {
+        this.navn = name;
+        this.telefon = phone;
+        this.prisPerDag = prisPerDag;
     }
 
     public void addTilmelding(Tilmelding tilmelding) {
@@ -30,20 +30,20 @@ public class Hotel {
         }
     }
 
-    public String getName() {
-        return name;
+    public String getNavn() {
+        return navn;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefon() {
+        return telefon;
     }
 
-    public int getPricePerDay() {
-        return pricePerDay;
+    public int getPrisPerDag() {
+        return prisPerDag;
     }
 
-    public void setPricePerDay(int pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public void setPrisPerDag(int prisPerDag) {
+        this.prisPerDag = prisPerDag;
     }
 
     public ArrayList<Deltager> getReservationer() {
@@ -58,5 +58,15 @@ public class Hotel {
         Tilkøb tilkøb = new Tilkøb(navn, pris);
         tilkøbt.add(tilkøb);
         return tilkøb;
+    }
+
+    public ArrayList<Tilkøb> getTilkøbt() {
+        return tilkøbt;
+    }
+
+    @Override
+    public String toString() {
+        return "" + navn +
+                "\nPris pr. dag: " + prisPerDag + "\n";
     }
 }

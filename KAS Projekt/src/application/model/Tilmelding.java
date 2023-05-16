@@ -9,12 +9,10 @@ public class Tilmelding {
     private int nummer;
     private LocalDate ankomst, afrejse;
     private Deltager deltager;
-    private ArrayList<Udflugt> udflugter;
+    private ArrayList<Udflugt> udflugter = new ArrayList<>();
 
-    public Tilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
+    public Tilmelding(int nummer, LocalDate ankomst, LocalDate afrejse,
                       Deltager deltager) {
-        this.hotel = hotel;
-        this.udflugt = udflugt;
         this.nummer = nummer;
         this.ankomst = ankomst;
         this.afrejse = afrejse;
@@ -55,10 +53,6 @@ public class Tilmelding {
                 hotel.addTilmelding(this);
             }
         }
-        if (this.getDeltager().isHasLedsager() == true) {
-            hotel.setPricePerDay(hotel.getPricePerDay() + 200);
-            hotel.isDobbeltVærelse();
-        }
     }
 
     public Udflugt getUdflugt() {
@@ -81,6 +75,15 @@ public class Tilmelding {
         return deltager;
     }
 
+    @Override
+    public String toString() {
+        return "\nDeltager: " + deltager +
+                "\nNummer: " + nummer +
+                "\nAnkomst: " + ankomst +
+                "\nAfrejse: " + afrejse +
+                "\nHotel: " + hotel +
+                "\nUdflugt: \n" + udflugt;
+    }
     /**
      * Sets the group as this person's group.
      */

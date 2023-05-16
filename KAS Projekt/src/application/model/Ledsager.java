@@ -24,4 +24,9 @@ public class Ledsager {
         this.telefon = telefon;
     }
 
+    @Override
+    public String toString() {
+        return "" + navn +
+                "\nTelefon: " + telefon;
+    }
 }

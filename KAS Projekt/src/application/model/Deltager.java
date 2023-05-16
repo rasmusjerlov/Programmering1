@@ -6,7 +6,7 @@ public class Deltager {
     private String navn, telefon, nationalitet;
     private boolean firma, hasLedsager;
     private Rolle rolle;
-    private ArrayList<Ledsager> ledsagere;
+    private ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
     public Deltager(String navn, String telefon, String nationalitet, boolean firma, boolean ledsager, Rolle rolle) {
         this.navn = navn;
@@ -17,14 +17,14 @@ public class Deltager {
         this.rolle = rolle;
     }
 
-    public ArrayList<Ledsager> getLedsager() {
-        return new ArrayList<>(ledsagere);
-    }
-
     public Ledsager createLedsager(String navn, String telefon) {
         Ledsager ledsager = new Ledsager(navn, telefon);
         ledsagere.add(ledsager);
         return ledsager;
+    }
+
+    public ArrayList<Ledsager> getLedsager() {
+        return new ArrayList<>(ledsagere);
     }
 
     public void addLedsager(Ledsager ledsager) {
@@ -63,5 +63,12 @@ public class Deltager {
         return rolle;
     }
 
-
+    @Override
+    public String toString() {
+        return "" + navn +
+                "\nNationalitet: " + nationalitet +
+                "\nTelefon: " + telefon +
+                "\nRolle: " + rolle +
+                "\nLedsager" + ledsagere + "\n";
+    }
 }

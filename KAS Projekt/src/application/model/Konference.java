@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Konference {
-    private static ArrayList<Tilmelding> tilmeldinger;
-    private static ArrayList<Udflugt> udflugter;
-    private static ArrayList<Hotel> hoteller;
+    private static ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
+    private static ArrayList<Udflugt> udflugter = new ArrayList<>();
+    private static ArrayList<Hotel> hoteller = new ArrayList<>();
     private LocalDate start, slut;
     private String lokation, navn;
     private int antalDeltagere, pris;
+    private Tilmelding tilmelding;
 
     public Konference(LocalDate start, LocalDate slut, String lokation, String navn, int pris) {
         this.start = start;
@@ -23,34 +24,44 @@ public class Konference {
         this.pris = pris;
     }
 
-    public static void addHotel(Hotel hotel) {
-        if (!hoteller.contains(hotel)) {
-            hoteller.add(hotel);
-        }
+    public static ArrayList<Tilmelding> getTilmeldinger() {
+        return tilmeldinger;
     }
 
-    public static void addUdflugt(Udflugt udflugt) {
-        if (!udflugter.contains(udflugt)) {
-            udflugter.add(udflugt);
-        }
+    public static ArrayList<Udflugt> getUdflugter() {
+        return udflugter;
     }
 
-    public void addTilmelding(Tilmelding tilmelding) {
-        if (!tilmeldinger.contains(tilmelding)) {
-            tilmeldinger.add(tilmelding);
-        }
+    public static ArrayList<Hotel> getHoteller() {
+        return hoteller;
     }
 
-    public Tilmelding createTilmelding(Hotel hotel, Udflugt udflugt, int nummer, LocalDate ankomst, LocalDate afrejse,
-                                       Deltager deltager) {
-        Tilmelding tilmelding = new Tilmelding(hotel, udflugt, nummer, ankomst, afrejse, deltager);
+    public static void addTilmelding(Tilmelding tilmelding) {
+        tilmeldinger.add(tilmelding);
+    }
+
+    public static Tilmelding createTilmelding(int nummer, LocalDate ankomst, LocalDate afrejse,
+                                              Deltager deltager) {
+        Tilmelding tilmelding = new Tilmelding(nummer, ankomst, afrejse, deltager);
         tilmeldinger.add(tilmelding);
         Storage.addTilmelding(tilmelding);
         return tilmelding;
     }
 
-    public Udflugt createUdflugt(String tidspunkt, String mødested, int pris) {
-        Udflugt udflugt = new Udflugt(tidspunkt, mødested, pris);
+    public void addUdflugt(Udflugt udflugt) {
+        if (!udflugter.contains(udflugt)) {
+            udflugter.add(udflugt);
+        }
+    }
+
+    public void addHotel(Hotel hotel) {
+        if (!hoteller.contains(hotel)) {
+            hoteller.add(hotel);
+        }
+    }
+
+    public Udflugt createUdflugt(String navn, String tidspunkt, String mødested, int pris) {
+        Udflugt udflugt = new Udflugt(navn, tidspunkt, mødested, pris);
         udflugter.add(udflugt);
         return udflugt;
     }
@@ -91,26 +102,28 @@ public class Konference {
         return antalDeltagere;
     }
 
-    public ArrayList<Tilmelding> getTilmeldinger() {
-        return tilmeldinger;
-    }
-
-    public ArrayList<Udflugt> getUdflugter() {
-        return new ArrayList<>(udflugter);
-    }
-
-    public ArrayList<Hotel> getHoteller() {
-        return hoteller;
+    @Override
+    public String toString() {
+        return "Navn: " + navn +
+                "\nStart: " + start +
+                "\nSlut: " + slut +
+                "\nLokation: " + lokation +
+                "\nPris: " + pris + "\n";
     }
 
     public int beregnPris(Tilmelding tilmelding) {
-        int konferenceDage = (int) DAYS.between(this.getStart(), this.getSlut());
-        System.out.println(konferenceDage);
-        int hotelDage = (int) DAYS.between(tilmelding.getAnkomst(), tilmelding.getAfrejse());
-        System.out.println(hotelDage);
+        int konferenceDage = (int) DAYS.between(this.getStart(), this.getSlut()) + 1;
+        int hotelNætter = (int) DAYS.between(tilmelding.getAnkomst(), tilmelding.getAfrejse());
         int konferencePris = this.pris * konferenceDage;
-        int hotelPris = tilmelding.getHotel().getPricePerDay() * hotelDage;
-        int udflugtPris = tilmelding.getUdflugt().getPris();
+        int hotelPris = tilmelding.getHotel().getPrisPerDag() * hotelNætter;
+        int udflugtPris = 0;
+        for (Udflugt u : tilmelding.getUdflugter()) {
+            udflugtPris += u.getPris();
+        }
+        int tilkøbPris = 0;
+        for (Tilkøb t : tilmelding.getHotel().getTilkøbt()) {
+            tilkøbPris += t.getPris() * hotelNætter;
+        }
         if (tilmelding.getDeltager().isFirma() == true) {
             hotelPris = 0;
             udflugtPris = 0;
@@ -122,7 +135,7 @@ public class Konference {
         if (tilmelding.getDeltager().isHasLedsager() == false) {
             udflugtPris = 0;
         }
-        int samletPris = konferencePris + hotelPris + udflugtPris;
+        int samletPris = konferencePris + hotelPris + udflugtPris + tilkøbPris;
 
         return samletPris;
     }

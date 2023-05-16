@@ -3,12 +3,13 @@ package application.model;
 import java.util.ArrayList;
 
 public class Udflugt {
-    private String tidspunkt, mødested;
+    private String tidspunkt, mødested, navn;
     private int pris;
     private ArrayList<Ledsager> ledsagere = new ArrayList<>();
     private ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
 
-    public Udflugt(String tidspunkt, String mødested, int pris) {
+    public Udflugt(String navn, String tidspunkt, String mødested, int pris) {
+        this.navn = navn;
         this.tidspunkt = tidspunkt;
         this.mødested = mødested;
         this.pris = pris;
@@ -23,6 +24,10 @@ public class Udflugt {
             tilmeldinger.add(tilmelding);
             tilmelding.addUdflugt(this);
         }
+    }
+
+    public String getNavn() {
+        return navn;
     }
 
     public void removeTilmelding(Tilmelding tilmelding) {
@@ -46,5 +51,11 @@ public class Udflugt {
 
     public ArrayList<Ledsager> getLedsagere() {
         return ledsagere;
+    }
+
+    @Override
+    public String toString() {
+        return "" + navn + "\nMødested: " + mødested +
+                "\nTidspunkt: " + tidspunkt + "\n";
     }
 }

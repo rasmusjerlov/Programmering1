@@ -13,16 +13,22 @@ public class Controller {
         return deltager;
     }
 
-    public static Udflugt createUdflugt(String tidspunkt, String mødested, int pris) {
-        Udflugt udflugt = new Udflugt(tidspunkt, mødested, pris);
-        Konference.addUdflugt(udflugt);
+    public static Udflugt createUdflugt(String navn, String tidspunkt, String mødested, int pris) {
+        Udflugt udflugt = new Udflugt(navn, tidspunkt, mødested, pris);
+        Storage.addUdflugt(udflugt);
         return udflugt;
     }
 
-    public static Hotel createhotel(String name, String phone, int pricePerDay) {
+    public static Hotel createHotel(String name, String phone, int pricePerDay) {
         Hotel hotel = new Hotel(name, phone, pricePerDay);
-        Konference.addHotel(hotel);
+        Storage.addHotel(hotel);
         return hotel;
+    }
+
+    public static Ledsager createLedsager(String navn, String telefon) {
+        Ledsager ledsager = new Ledsager(navn, telefon);
+        Storage.addLedsager(ledsager);
+        return ledsager;
     }
 
     public static Konference createKonference(LocalDate start, LocalDate slut, String lokation, String navn, int pris) {
