@@ -12,6 +12,7 @@ public class Storage {
     private static ArrayList<Udflugt> udflugter = new ArrayList<>();
     private static ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
+
     public static void addKonference(Konference konference) {
         konferencer.add(konference);
     }
@@ -30,6 +31,10 @@ public class Storage {
 
     public static void addHotel(Hotel hotel) {
         hoteller.add(hotel);
+    }
+
+    public static ArrayList<Hotel> getHoteller() {
+        return hoteller;
     }
 
     public static void addUdflugt(Udflugt udflugt) {

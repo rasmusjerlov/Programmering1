@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Konference {
-    private static ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
-    private static ArrayList<Udflugt> udflugter = new ArrayList<>();
-    private static ArrayList<Hotel> hoteller = new ArrayList<>();
+    private ArrayList<Udflugt> udflugter = new ArrayList<>();
+    private ArrayList<Hotel> hoteller = new ArrayList<>();
+    private ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
     private LocalDate start, slut;
     private String lokation, navn;
     private int antalDeltagere, pris;
@@ -24,24 +24,24 @@ public class Konference {
         this.pris = pris;
     }
 
-    public static ArrayList<Tilmelding> getTilmeldinger() {
-        return tilmeldinger;
-    }
-
-    public static ArrayList<Udflugt> getUdflugter() {
-        return udflugter;
-    }
-
-    public static ArrayList<Hotel> getHoteller() {
+    public ArrayList<Hotel> getHoteller() {
         return hoteller;
     }
 
-    public static void addTilmelding(Tilmelding tilmelding) {
+    public ArrayList<Udflugt> getUdflugter() {
+        return udflugter;
+    }
+
+    public ArrayList<Tilmelding> getTilmeldinger() {
+        return tilmeldinger;
+    }
+
+    public void addTilmelding(Tilmelding tilmelding) {
         tilmeldinger.add(tilmelding);
     }
 
-    public static Tilmelding createTilmelding(int nummer, LocalDate ankomst, LocalDate afrejse,
-                                              Deltager deltager) {
+    public Tilmelding createTilmelding(int nummer, LocalDate ankomst, LocalDate afrejse,
+                                       Deltager deltager) {
         Tilmelding tilmelding = new Tilmelding(nummer, ankomst, afrejse, deltager);
         tilmeldinger.add(tilmelding);
         Storage.addTilmelding(tilmelding);
@@ -60,8 +60,8 @@ public class Konference {
         }
     }
 
-    public Udflugt createUdflugt(String navn, String tidspunkt, String mødested, int pris) {
-        Udflugt udflugt = new Udflugt(navn, tidspunkt, mødested, pris);
+    public Udflugt createUdflugt(String navn, String tidspunkt, String mødested, int pris, Konference konference) {
+        Udflugt udflugt = new Udflugt(navn, tidspunkt, mødested, pris, konference);
         udflugter.add(udflugt);
         return udflugt;
     }
@@ -124,7 +124,7 @@ public class Konference {
         for (Tilkøb t : tilmelding.getHotel().getTilkøbt()) {
             tilkøbPris += t.getPris() * hotelNætter;
         }
-        if (tilmelding.getDeltager().isFirma() == true) {
+        if (tilmelding.getDeltager().getRolle() == Rolle.FIRMADELTAGER) {
             hotelPris = 0;
             udflugtPris = 0;
             konferencePris = 0;

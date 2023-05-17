@@ -16,4 +16,10 @@ public class Tilkøb {
     public int getPris() {
         return pris;
     }
+
+    @Override
+    public String toString() {
+        return "" + navn + " \nPris: " + pris;
+        
+    }
 }

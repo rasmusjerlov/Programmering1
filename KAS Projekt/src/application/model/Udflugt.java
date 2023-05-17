@@ -7,12 +7,19 @@ public class Udflugt {
     private int pris;
     private ArrayList<Ledsager> ledsagere = new ArrayList<>();
     private ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
+    private Konference konference;
 
-    public Udflugt(String navn, String tidspunkt, String mødested, int pris) {
+    public Udflugt(String navn, String tidspunkt, String mødested, int pris, Konference konference) {
         this.navn = navn;
         this.tidspunkt = tidspunkt;
         this.mødested = mødested;
         this.pris = pris;
+        this.setKonference(konference);
+    }
+
+    private void setKonference(Konference konference) {
+        this.konference = konference;
+        konference.addUdflugt(this);
     }
 
     public ArrayList<Tilmelding> getTilmeldinger() {

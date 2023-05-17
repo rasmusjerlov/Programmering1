@@ -1,11 +1,9 @@
 package guifx;
 
 import application.controller.Controller;
-import application.model.Deltager;
-import application.model.Konference;
-import application.model.Ledsager;
-import application.model.Rolle;
+import application.model.*;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,6 +15,7 @@ import javafx.stage.Stage;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class GUI extends Application {
@@ -34,6 +33,12 @@ public class GUI extends Application {
     private ListView konferencerLV;
     private ListView udflugterLV;
     private ListView hotellerLV;
+    private int nummerCount;
+    private RadioButton deltagerPrivat;
+    private RadioButton deltagerForedragsholder;
+    private RadioButton deltagerAnsat;
+    private ComboBox hotelTilvalg;
+    private ListView<Konference> konferenceListView;
 
     public static void visTilmeldingOnAction() {
         GridPane pane = new GridPane();
@@ -43,7 +48,7 @@ public class GUI extends Application {
         stage.setScene(scene);
         ListView tilmeldinger = new ListView<>();
         pane.add(tilmeldinger, 2, 15);
-        tilmeldinger.getItems().setAll(Konference.getTilmeldinger());
+        tilmeldinger.getItems().setAll(Storage.getTilmeldinger());
         stage.show();
     }
 
@@ -55,7 +60,7 @@ public class GUI extends Application {
         stage.setScene(scene);
         ListView hoteller = new ListView<>();
         pane.add(hoteller, 2, 15);
-        hoteller.getItems().setAll(Konference.getHoteller());
+        hoteller.getItems().setAll(Storage.getHoteller());
         stage.show();
     }
 
@@ -67,7 +72,7 @@ public class GUI extends Application {
         stage.setScene(scene);
         ListView udflugter = new ListView<>();
         pane.add(udflugter, 2, 15);
-        udflugter.getItems().setAll(Konference.getUdflugter());
+        udflugter.getItems().setAll(Storage.getUdflugter());
         stage.show();
     }
 
@@ -171,21 +176,29 @@ public class GUI extends Application {
         hotellerLV.setPadding(new Insets(10, 10, 10, 10));
 
         konferencerLV.getItems().setAll(Storage.getKonferencer());
+        ChangeListener<Konference> listener1 = (ov, o, n) -> this.nyKonferenceValg();
+        konferencerLV.getSelectionModel().selectedItemProperty().addListener(listener1);
+        ChangeListener<Hotel> listener2 = (ov, oo, nn) -> this.nytHotelValgt();
+        hotellerLV.getSelectionModel().selectedItemProperty().addListener(listener2);
 
-        udflugterLV.getItems().setAll(Konference.getUdflugter());
-        hotellerLV.getItems().setAll(Konference.getHoteller());
 
         VBox vbDeltagerTxf = new VBox(10);
-        TextField deltagerNavnTxf = new TextField("Deltagerens navn");
-        TextField deltagerTelefonTxf = new TextField("Telefonnummer");
-        TextField deltagerAdresseTxf = new TextField("Adresse");
-        TextField deltagerLandTxf = new TextField("Land");
+        Label deltagernavnLbl = new Label("Deltagerens navn");
+        TextField deltagerNavnTxf = new TextField();
+        Label deltagerTelefonLbl = new Label("Deltagerens telefonnummer");
+        TextField deltagerTelefonTxf = new TextField();
+        Label deltagerAdresseLbl = new Label("Adresse");
+        TextField deltagerAdresseTxf = new TextField();
+        Label deltagerLandLbl = new Label("Land");
+        TextField deltagerLandTxf = new TextField();
+        Label ankomstLbl = new Label("Ankomst");
         DatePicker dpAnkomst = new DatePicker(LocalDate.of(2023, 5, 17));
+        Label afrejseLbl = new Label("Afrejse");
         DatePicker dpAfrejse = new DatePicker(LocalDate.of(2023, 5, 18));
 
-        RadioButton deltagerPrivat = new RadioButton("Privat");
-        RadioButton deltagerForedragsholder = new RadioButton("Foredragsholder");
-        RadioButton deltagerAnsat = new RadioButton("Ansat i firma");
+        deltagerPrivat = new RadioButton("Privat");
+        deltagerForedragsholder = new RadioButton("Foredragsholder");
+        deltagerAnsat = new RadioButton("Ansat i firma");
 
         ToggleGroup deltagerRolle = new ToggleGroup();
         deltagerPrivat.setToggleGroup(deltagerRolle);
@@ -194,42 +207,73 @@ public class GUI extends Application {
 
         HBox hbRadio = new HBox(10);
         hbRadio.getChildren().addAll(deltagerPrivat, deltagerForedragsholder, deltagerAnsat);
-        vbDeltagerTxf.getChildren().addAll(deltagerNavnTxf, deltagerTelefonTxf, deltagerAdresseTxf,
-                deltagerLandTxf, dpAnkomst, dpAfrejse, hbRadio);
+        vbDeltagerTxf.getChildren().addAll(deltagernavnLbl, deltagerNavnTxf, deltagerTelefonLbl, deltagerTelefonTxf, deltagerAdresseLbl, deltagerAdresseTxf,
+                deltagerLandLbl, deltagerLandTxf, ankomstLbl, dpAnkomst, afrejseLbl, dpAfrejse, hbRadio);
         pane.add(vbDeltagerTxf, 1, 3);
         vbDeltagerTxf.setPadding(new Insets(10, 10, 10, 10));
 
         VBox vbLedsagerTxf = new VBox(10);
-        TextField ledsagerNavnTxf = new TextField("Ledsagerens navn");
-        TextField ledsagerTelefonTxf = new TextField("Ledsagerens telefonnummer");
-        vbLedsagerTxf.getChildren().addAll(ledsagerNavnTxf, ledsagerTelefonTxf);
+        Label ledsagerNavnLbl = new Label("Ledsagerens navn");
+        TextField ledsagerNavnTxf = new TextField();
+        Label ledsagerTelefonLbl = new Label("Ledsagerens telefonnummer");
+        TextField ledsagerTelefonTxf = new TextField();
+        Label tilvalgLbl = new Label("Tilkøb");
+        hotelTilvalg = new ComboBox<>();
+        ChangeListener<Tilkøb> listener3 = (ooo, on, oonn) -> this.valgtTilvalg();
+        hotelTilvalg.getItems().setAll(getTilkøb());
+
+        vbLedsagerTxf.getChildren().addAll(ledsagerNavnLbl, ledsagerNavnTxf, ledsagerTelefonLbl, ledsagerTelefonTxf, tilvalgLbl, hotelTilvalg);
         pane.add(vbLedsagerTxf, 2, 3);
         vbLedsagerTxf.setPadding(new Insets(10, 10, 10, 10));
 
+
         Button buttonOpret = new Button("Opret tilmelding");
         pane.add(buttonOpret, 2, 4);
-        buttonOpret.setPadding(new Insets(5, 5, 5, 5));
 
         VBox vbFirmaTxf = new VBox(10);
-        TextField firmaNavnTxf = new TextField("Firmanavn");
-        TextField firmaTelefonTxf = new TextField("Firma telefonnummer");
-        vbFirmaTxf.getChildren().addAll(firmaNavnTxf, firmaTelefonTxf, buttonOpret);
+        Label firmaNavnLbl = new Label("Firmanavn");
+        TextField firmaNavnTxf = new TextField();
+        Label firmaTelefonLbl = new Label("Firma telefonnummer");
+        TextField firmaTelefonTxf = new TextField();
+        firmaNavnTxf.setEditable(false);
+        firmaTelefonTxf.setEditable(false);
+        deltagerAnsat.setOnAction(e2 -> {
+            firmaNavnTxf.setEditable(true);
+            firmaTelefonTxf.setEditable(true);
+        });
+        deltagerPrivat.setOnAction(e3 -> {
+            firmaNavnTxf.clear();
+            firmaTelefonTxf.clear();
+            firmaNavnTxf.setEditable(false);
+            firmaTelefonTxf.setEditable(false);
+        });
+        deltagerForedragsholder.setOnAction(e4 -> {
+            firmaNavnTxf.clear();
+            firmaTelefonTxf.clear();
+            firmaNavnTxf.setEditable(false);
+            firmaTelefonTxf.setEditable(false);
+        });
+        vbFirmaTxf.getChildren().addAll(firmaNavnLbl, firmaNavnTxf, firmaTelefonLbl, firmaTelefonTxf, buttonOpret);
         pane.add(vbFirmaTxf, 3, 3);
         vbFirmaTxf.setPadding(new Insets(10, 10, 10, 10));
         stage.show();
         buttonOpret.setOnAction(e -> {
+            nummerCount++;
             String deltagerNavn = deltagerNavnTxf.getText();
             String deltagerTelefon = deltagerTelefonTxf.getText();
             String nationalitet = deltagerLandTxf.getText();
             boolean firma = false;
+            Rolle rolle = Rolle.PRIVAT;
             if (firmaNavnTxf.getText().length() > 0 && firmaTelefonTxf.getText().length() > 0) {
+                rolle = Rolle.FIRMADELTAGER;
                 firma = true;
             }
             boolean hasLedsager = false;
             if (ledsagerNavnTxf.getText().length() > 0 && ledsagerTelefonTxf.getText().length() > 0) {
                 hasLedsager = true;
             }
-            Rolle rolle = Rolle.PRIVAT;
+            LocalDate ankomst = dpAnkomst.getValue();
+            LocalDate afrejse = dpAfrejse.getValue();
             if (deltagerPrivat.isSelected()) {
                 rolle = Rolle.PRIVAT;
             } else if (deltagerForedragsholder.isSelected()) {
@@ -243,7 +287,18 @@ public class GUI extends Application {
                 Ledsager ledsager = Controller.createLedsager(ledsagerNavnTxf.getText(), ledsagerTelefonTxf.getText());
                 deltager.addLedsager(ledsager);
             }
-            System.out.println(Storage.getDeltagere());
+            stage.hide();
+            Tilmelding tilmelding = getValgtKonference().createTilmelding(nummerCount, ankomst, afrejse, deltager);
+            tilmelding.setHotel(getValgtHotel());
+            tilmelding.addUdflugt(getValgtUdflugt());
+            Button buttonBeregn = new Button("Beregn samlet pris");
+            pane.add(buttonBeregn, 3, 4);
+            buttonBeregn.setOnAction(e1 -> {
+                getValgtKonference().beregnPris(tilmelding);
+                Label pris = new Label("Pris: " + getValgtKonference().beregnPris(tilmelding));
+                pris.setPadding(new Insets(10, 10, 10, 10));
+                pane.add(pris, 3, 5);
+            });
         });
 //        Label vælgKonference = new Label("Vælg Konference");
 //        pane.add(vælgKonference, 1, 1);
@@ -262,6 +317,40 @@ public class GUI extends Application {
 //        pane.add(buttonFortsæt, 1, 3);
 //        buttonFortsæt.setPadding(new Insets(10, 10, 10, 10));
 //        tilmeldingFortsæt.setOnAction(e -> visBlanketVindueOnAction());
+    }
+
+    private Tilkøb valgtTilvalg() {
+        return (Tilkøb) hotelTilvalg.getSelectionModel().getSelectedItem();
+    }
+
+    private void nytHotelValgt() {
+        hotelTilvalg.getItems().setAll(getValgtHotel().getTilkøbt());
+    }
+
+    private ArrayList<Tilkøb> getTilkøb() {
+        Hotel hotel = getValgtHotel();
+        if (hotel != null) {
+            return hotel.getTilkøbt();
+        }
+        return new ArrayList<Tilkøb>();
+    }
+
+    private void nyKonferenceValg() {
+        udflugterLV.getItems().setAll(getValgtKonference().getUdflugter());
+        ChangeListener<Udflugt> listener1 = (ov, o, n) -> this.getValgtUdflugt();
+        hotellerLV.getItems().setAll(getValgtKonference().getHoteller());
+    }
+
+    private Hotel getValgtHotel() {
+        return (Hotel) hotellerLV.getSelectionModel().getSelectedItem();
+    }
+
+    private Udflugt getValgtUdflugt() {
+        return (Udflugt) udflugterLV.getSelectionModel().getSelectedItem();
+    }
+
+    private Konference getValgtKonference() {
+        return (Konference) konferencerLV.getSelectionModel().getSelectedItem();
     }
 
 
@@ -400,7 +489,7 @@ public class GUI extends Application {
             String tidspunkt = txfTidspunkt.getText();
             String mødested = txfMødested.getText();
             int pris = Integer.parseInt(txfPris.getText());
-            Controller.createUdflugt(navn, tidspunkt, mødested, pris);
+//            Controller.createUdflugt(navn, tidspunkt, mødested, pris, listener);
             stage.hide();
         });
     }

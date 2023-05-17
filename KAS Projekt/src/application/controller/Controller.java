@@ -13,8 +13,8 @@ public class Controller {
         return deltager;
     }
 
-    public static Udflugt createUdflugt(String navn, String tidspunkt, String mødested, int pris) {
-        Udflugt udflugt = new Udflugt(navn, tidspunkt, mødested, pris);
+    public static Udflugt createUdflugt(String navn, String tidspunkt, String mødested, int pris, Konference konference) {
+        Udflugt udflugt = new Udflugt(navn, tidspunkt, mødested, pris, konference);
         Storage.addUdflugt(udflugt);
         return udflugt;
     }

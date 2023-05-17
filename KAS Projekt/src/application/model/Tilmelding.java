@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class Tilmelding {
     private Hotel hotel;
-    private Udflugt udflugt;
     private int nummer;
     private LocalDate ankomst, afrejse;
     private Deltager deltager;
     private ArrayList<Udflugt> udflugter = new ArrayList<>();
+    private ArrayList<Konference> konferencer = new ArrayList<>();
 
     public Tilmelding(int nummer, LocalDate ankomst, LocalDate afrejse,
                       Deltager deltager) {
@@ -55,9 +55,6 @@ public class Tilmelding {
         }
     }
 
-    public Udflugt getUdflugt() {
-        return udflugt;
-    }
 
     public int getNummer() {
         return nummer;
@@ -82,7 +79,7 @@ public class Tilmelding {
                 "\nAnkomst: " + ankomst +
                 "\nAfrejse: " + afrejse +
                 "\nHotel: " + hotel +
-                "\nUdflugt: \n" + udflugt;
+                "\nUdflugt: \n" + udflugter;
     }
     /**
      * Sets the group as this person's group.
